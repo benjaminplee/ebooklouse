@@ -1,3 +1,5 @@
+require 'lookup_result'
+
 class Dictionary
   def initialize
     @words = []
@@ -18,7 +20,7 @@ class Dictionary
   end
 
   def lookup(candidate_word)
-    result = Result.new
+    result = LookupResult.new
 
     @words.each do | word |
       result.was_found = true if word == candidate_word
@@ -26,16 +28,5 @@ class Dictionary
     end
 
     result
-  end
-
-  private
-
-  class Result
-    attr_accessor :was_found, :is_prefix
-
-    def initialize
-      @was_found = false
-      @is_prefix = false
-    end
   end
 end
