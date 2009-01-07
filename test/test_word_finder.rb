@@ -68,10 +68,10 @@ class TestWordFinder < Test::Unit::TestCase
   end
 
   def test_below
-    assert_nil @finder.below(Point.new(0, 0), @matrix)
-    assert_nil @finder.below(Point.new(1, 0), @matrix)
-    assert_equal Point.new(1, 0), @finder.below(Point.new(1, 1), @matrix)
-    assert_nil @finder.below(Point.new(2, 0), @matrix)
+    assert_nil @finder.below(Point.new(0, 0))
+    assert_nil @finder.below(Point.new(1, 0))
+    assert_equal Point.new(1, 0), @finder.below(Point.new(1, 1))
+    assert_nil @finder.below(Point.new(2, 0))
   end
 
   def test_looks_up_correct_single_letter_words

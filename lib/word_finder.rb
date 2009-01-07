@@ -23,7 +23,7 @@ class WordFinder
 
       if result.is_prefix
         spider(points + [above(points[-1], matrix)], matrix, dictionary, words)
-        spider(points + [below(points[-1], matrix)], matrix, dictionary, words)
+        spider(points + [below(points[-1])], matrix, dictionary, words)
 
         spider(points + [bottom_right(points[-1], matrix)], matrix, dictionary, words)
         spider(points + [top_right(points[-1], matrix)], matrix, dictionary, words)
@@ -86,7 +86,7 @@ class WordFinder
     return point.y + 1 < matrix[point.x].size ? Point.new(point.x, point.y + 1) : nil
   end
 
-  def below(point, matrix)
+  def below(point)
     return point.y > 0 ? Point.new(point.x, point.y - 1) : nil
   end
 

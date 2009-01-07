@@ -17,26 +17,26 @@ class TestDictionary < Test::Unit::TestCase
   end
 
   def test_not_empty_after_load
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/sample_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/sample_word_list.txt'))
 
     assert !@dictionary.empty?
   end
 
   def test_appropriate_size_after_load
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/sample_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/sample_word_list.txt'))
 
     assert_equal 20, @dictionary.size
   end
 
   def test_load_is_additive
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/sample_word_list.txt'))
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/small_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/sample_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/small_word_list.txt'))
 
     assert_equal 25, @dictionary.size
   end
   
   def test_words_in_list_can_be_found
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/sample_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/sample_word_list.txt'))
 
     assert @dictionary.lookup('dog').was_found
     assert @dictionary.lookup('cat').was_found
@@ -47,7 +47,7 @@ class TestDictionary < Test::Unit::TestCase
   end
 
   def test_other_words_are_not_there
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/sample_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/sample_word_list.txt'))
 
     assert !@dictionary.lookup('bird').was_found
     assert !@dictionary.lookup('hose').was_found
@@ -58,8 +58,8 @@ class TestDictionary < Test::Unit::TestCase
   end
 
   def test_lookup_works_on_both_files
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/sample_word_list.txt'))
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/small_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/sample_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/small_word_list.txt'))
 
     assert @dictionary.lookup('dog').was_found
     assert @dictionary.lookup('cat').was_found
@@ -68,7 +68,7 @@ class TestDictionary < Test::Unit::TestCase
   end
 
   def test_lookup_finds_prefixes
-    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/sample_word_list.txt'))
+    @dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/data/sample_word_list.txt'))
 
     assert !@dictionary.lookup('dog').is_prefix
     assert @dictionary.lookup('t').is_prefix
