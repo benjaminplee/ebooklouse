@@ -1,0 +1,45 @@
+know what letters are on the screen
+- know where letters are on board
+- - know where board is
+- determine what if any letter is present
+- - knowing what letters are possible
+- - given a picture of a letter, figure out what it is
+
+given board state, produce list of all possible words
+
+check possible word against dictionary
+
+given a word of tiles and level, calculate the word score
+
+click on a tile
+
+click on all tiles for a word
+
+read the score for the currently selected word
+
+click on submit button
+
+detect if ready for next word or end of level
+
+click on go to next level button
+
+
+** using above, click through all words found in our list to verify existence and score
+- if not found, remove from our list, if scored incorrectly, record state for later
+
+** using above, click through all combinations of possible words looking for words not
+  found in our list
+
+
+
+* given simple text based input of a board state, produce a list of all words found on the board
+* given a board state AND a word, show the list of tiles to generate the word
+* given a board state and a word, produce new board without word and with others moved down
+* add ability to read board state with tile types added
+* show word list from board state with scores
+* display tile locations for highest scored word
+* produce board state from desktop, generate best word and word list as before
+* select best word in Flash game and submit
+* detect that word doesn't exist and abandon
+* ...
+
