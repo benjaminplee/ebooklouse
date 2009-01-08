@@ -10,4 +10,8 @@ class Point
     other != nil and other.x == @x and other.y == @y
   end
 
+  def to_s
+    "(#{@x},#{@y})"
+  end
+
 end

@@ -79,7 +79,7 @@ class TestWordFinder < Test::Unit::TestCase
 
     words = @finder.find_words(@matrix, @dictionary)
 
-    assert_equal(['a', 'b', 'c', 'd'], words)
+    assert_equal(['a', 'b', 'c', 'd'], words.collect { |word| word.string })
     assert_equal(['a', 'b', 'c', 'd'], @dictionary.words_looked_up)
   end
 
@@ -90,7 +90,7 @@ class TestWordFinder < Test::Unit::TestCase
     words = @finder.find_words(@matrix, @dictionary)
 
     assert_equal(14, @dictionary.words_looked_up.size)
-    assert_equal(word_list, words)
+    assert_equal(word_list, words.collect { |word| word.string })
   end
 
   def test_looks_up_all_prefixed_without_cycles
@@ -107,7 +107,7 @@ class TestWordFinder < Test::Unit::TestCase
 
     words = @finder.find_words(@matrix, @dictionary)
 
-    assert_equal(['a', 'b', 'c', 'd'], words)
+    assert_equal(['a', 'b', 'c', 'd'], words.collect { |word| word.string })
   end
 
   def test_finds_different_single_letter_words
@@ -115,7 +115,29 @@ class TestWordFinder < Test::Unit::TestCase
 
     words = @finder.find_words([['a'], ['c', 'b'], ['d']], @dictionary)
 
-    assert_equal(['a', 'c', 'b', 'd'], words)
+    assert_equal(['a', 'c', 'b', 'd'], words.collect { |word| word.string })
+  end
+
+  def test_find_words_returns_words_and_their_paths
+    @dictionary.load_word_list(['abc'])
+
+    words = @finder.find_words([['a'], ['b', 'c'], ['d']], @dictionary)
+
+    assert_equal(1, words.size)
+    assert_equal('abc', words[0].string)
+    assert_equal([Point.new(0,0), Point.new(1,0), Point.new(1,1)], words[0].path)
+  end
+
+  def test_find_several_paths
+    @dictionary.load_word_list(['b', 'dc'])
+
+    words = @finder.find_words([['a'], ['b', 'c'], ['d']], @dictionary)
+
+    assert_equal(2, words.size)
+    assert_equal('b', words[0].string)
+    assert_equal([Point.new(1,0)], words[0].path)
+    assert_equal('dc', words[1].string)
+    assert_equal([Point.new(2,0), Point.new(1,1)], words[1].path)
   end
   
 end

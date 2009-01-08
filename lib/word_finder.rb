@@ -1,4 +1,5 @@
 require 'point'
+require 'word'
 
 class WordFinder
 
@@ -19,7 +20,7 @@ class WordFinder
       word = points.collect { | point | matrix[point.x][point.y] }.to_s
       result = dictionary.lookup(word)
 
-      words << word if result.was_found
+      words << Word.new(word, points.clone) if result.was_found
 
       if result.is_prefix
         spider(points + [above(points[-1], matrix)], matrix, dictionary, words)

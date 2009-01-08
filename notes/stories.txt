@@ -1,3 +1,5 @@
+ruby ebooklouse.rb ../test/data/sample_text_matrix.txt ../data/word_list.txt
+
 know what letters are on the screen
 - know where letters are on board
 - - know where board is

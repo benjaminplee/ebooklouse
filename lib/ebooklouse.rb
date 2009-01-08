@@ -11,4 +11,5 @@ finder = WordFinder.new
 
 words = finder.find_words(matrix, dictionary)
 
-puts words
+words.each { |word| puts "- #{word.string}  [#{word.path.join(', ').to_s}]" }
+
