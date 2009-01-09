@@ -28,7 +28,7 @@ end
 class TestWordFinder < Test::Unit::TestCase
   def setup
     @finder = WordFinder.new
-    @matrix = [['a'], ['b', 'c'], ['d']]
+    @matrix = [[Tile.new('a')], [Tile.new('b'), Tile.new('c')], [Tile.new('d')]]
     @dictionary = LoggingDictionary.new
   end
 
@@ -113,7 +113,7 @@ class TestWordFinder < Test::Unit::TestCase
   def test_finds_different_single_letter_words
     @dictionary.load_word_list(['a', 'b', 'c', 'd'])
 
-    words = @finder.find_words([['a'], ['c', 'b'], ['d']], @dictionary)
+    words = @finder.find_words([[Tile.new('a')], [Tile.new('c'), Tile.new('b')], [Tile.new('d')]], @dictionary)
 
     assert_equal(['a', 'c', 'b', 'd'], words.collect { |word| word.string })
   end
@@ -121,7 +121,7 @@ class TestWordFinder < Test::Unit::TestCase
   def test_find_words_returns_words_and_their_paths
     @dictionary.load_word_list(['abc'])
 
-    words = @finder.find_words([['a'], ['b', 'c'], ['d']], @dictionary)
+    words = @finder.find_words(@matrix, @dictionary)
 
     assert_equal(1, words.size)
     assert_equal('abc', words[0].string)
@@ -131,7 +131,7 @@ class TestWordFinder < Test::Unit::TestCase
   def test_find_several_paths
     @dictionary.load_word_list(['b', 'dc'])
 
-    words = @finder.find_words([['a'], ['b', 'c'], ['d']], @dictionary)
+    words = @finder.find_words(@matrix, @dictionary)
 
     assert_equal(2, words.size)
     assert_equal('b', words[0].string)
