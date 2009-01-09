@@ -9,6 +9,14 @@ class TestTextMatrixLoader < Test::Unit::TestCase
 
     result = TextMatrixLoader.new.load_matrix(File.new(File.dirname(__FILE__) + '/data/sample_text_matrix.txt'))
 
-    assert_equal result, matrix
+    assert_equal matrix, result.collect { |col| col.collect { |tile| tile.letter } }
+  end
+
+  def test_text_matrix_assumes_normal_tiles
+    matrix = [Array.new(4, :normal), Array.new(5, :normal), Array.new(4, :normal), Array.new(5, :normal), Array.new(4, :normal), Array.new(5, :normal), Array.new(4, :normal)]
+
+    result = TextMatrixLoader.new.load_matrix(File.new(File.dirname(__FILE__) + '/data/sample_text_matrix.txt'))
+
+    assert_equal matrix, result.collect { |col| col.collect { |tile| tile.tile_type } }
   end
 end

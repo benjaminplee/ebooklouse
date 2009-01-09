@@ -1,4 +1,3 @@
-
 class Word
   attr_accessor :string, :path
 

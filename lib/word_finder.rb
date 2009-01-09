@@ -17,7 +17,7 @@ class WordFinder
 
   def spider(points, matrix, dictionary, words)
     if points[-1] and points.index(points[-1]) == (points.size - 1)
-      word = points.collect { | point | matrix[point.x][point.y] }.to_s
+      word = points.collect { | point | matrix[point.x][point.y].letter }.to_s
       result = dictionary.lookup(word)
 
       words << Word.new(word, points.clone) if result.was_found
@@ -36,7 +36,7 @@ class WordFinder
   end
 
   def top_right(point, matrix)
-    if point.x + 1 < matrix.size
+    if room_to_the_right_of(point, matrix)
       if tall_row?(point, matrix)
         return Point.new(point.x + 1, point.y) if point.y != (matrix[point.x].size - 1)
       else
@@ -48,7 +48,7 @@ class WordFinder
   end
 
   def bottom_right(point, matrix)
-    if point.x + 1 < matrix.size
+    if room_to_the_right_of(point, matrix)
       if tall_row?(point, matrix)
         return Point.new(point.x + 1, point.y - 1) if point.y != 0
       else
@@ -60,7 +60,7 @@ class WordFinder
   end
 
   def top_left(point, matrix)
-    if point.x - 1 >= 0
+    if room_to_the_left_of(point)
       if tall_row?(point, matrix)
         return Point.new(point.x - 1, point.y) if point.y != (matrix[point.x].size - 1)
       else
@@ -72,7 +72,7 @@ class WordFinder
   end
 
   def bottom_left(point, matrix)
-    if point.x - 1 >= 0
+    if room_to_the_left_of(point)
       if tall_row?(point, matrix)
         return Point.new(point.x - 1, point.y - 1) if point.y != 0
       else
@@ -89,6 +89,14 @@ class WordFinder
 
   def below(point)
     return point.y > 0 ? Point.new(point.x, point.y - 1) : nil
+  end
+
+  def room_to_the_left_of(point)
+    point.x - 1 >= 0
+  end
+
+  def room_to_the_right_of(point, matrix)
+    point.x + 1 < matrix.size
   end
 
   def tall_row?(point, matrix)

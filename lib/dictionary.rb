@@ -14,9 +14,7 @@ class Dictionary
   end
 
   def load_word_list(word_list)
-    word_list.each do |line|
-      @words << line.chomp
-    end
+    @words += word_list.collect { |line| line.chomp }
   end
 
   def lookup(candidate_word)
