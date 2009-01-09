@@ -2,6 +2,8 @@ $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
 require 'test/unit'
 require 'text_matrix_loader'
+require 'dictionary'
+require 'word_finder'
 
 class TestTextMatrixLoader < Test::Unit::TestCase
   def test_sample_text_matrix
@@ -18,5 +20,15 @@ class TestTextMatrixLoader < Test::Unit::TestCase
     result = TextMatrixLoader.new.load_matrix(File.new(File.dirname(__FILE__) + '/data/sample_text_matrix.txt'))
 
     assert_equal matrix, result.collect { |col| col.collect { |tile| tile.tile_type } }
+  end
+
+  def test_end_to_end_test
+    matrix = TextMatrixLoader.new.load_matrix(File.new(File.dirname(__FILE__) + '/data/sample_text_matrix.txt'))
+    dictionary = Dictionary.new
+    dictionary.load_word_list(File.new(File.dirname(__FILE__) + '/../data/word_list.txt'))
+
+    words = WordFinder.new.find_words(matrix, dictionary)
+
+    assert_equal 34, words.size
   end
 end
