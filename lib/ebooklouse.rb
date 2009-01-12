@@ -18,3 +18,4 @@ image = Desktop.new.capture_desktop
 puts image.pixel(1, 1).inspect
 puts image.width
 puts image.height
+
